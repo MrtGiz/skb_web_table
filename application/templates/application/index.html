@@ -1,0 +1,36 @@
+{% extends 'application/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container-sm">
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Дата заявки</th>
+            <th scope="col">Продукт</th>
+            <th scope="col">Телефон клиента</th>
+            <th scope="col">Решение</th>
+            <th scope="col">Комментарий</th>
+            <th scope="col">Редактировать</th>
+            <th scope="col">Удалить</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            {% for app in applications %}
+            <tr>
+              <td>{{ app.date }}</td>
+              <td>{{ app.product }}</td>
+              <td>{{ app.phone }}</td>
+              <td>{{ app.decision }}</td>
+              <td>{{ app.comment }}</td>
+              <td><a href="#">Изменить запись</a></td>
+              <td><a href="#">Удалить запись</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}
