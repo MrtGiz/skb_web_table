@@ -22,7 +22,8 @@
           <div class="navbar-nav">
             <a class="nav-link active" aria-current="page" href="{% url 'app:index' %}">Главная</a>
             <a class="nav-link active" href="{% url 'app:create' %}">Создать заявку</a>
-            <a class="nav-link active" href="#">Functions</a>
+            <a class="nav-link active" href="{% url 'app:export_csv' %}">Экспорт в csv</a>
+            <a class="nav-link active" href="{% url 'app:export_xls' %}">Экспорт в xls</a>
           </div>
         </div>
       </div>

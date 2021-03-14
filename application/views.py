@@ -4,6 +4,7 @@ from django_filters.views import FilterMixin
 from .forms import ApplicationForm
 from .models import Application
 from .filters import AppFilter
+from .utils.export import Export
 
 
 class ApplicationListView(ListView, FilterMixin):
@@ -41,3 +42,13 @@ class ApplicationDeleteView(DeleteView):
     template_name = 'application/deleteapp.html'
     model = Application
     success_url = '/'
+
+
+def export_to_csv(request):
+    response = Export().export_to_csv()
+    return response
+
+
+def export_to_xls(request):
+    response = Export().export_to_excel()
+    return response
