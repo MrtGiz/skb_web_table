@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.shortcuts import render
 
 from .forms import ApplicationForm
@@ -14,6 +14,17 @@ class ApplicationListView(ListView):
 class ApplicationCreateView(CreateView):
     template_name = 'application/createapp.html'
     form_class = ApplicationForm
-    success_url = 'application/index.html'
+    success_url = '/'
 
 
+class ApplicationUpdateView(UpdateView):
+    template_name = 'application/updateapp.html'
+    model = Application
+    form_class = ApplicationForm
+    success_url = '/'
+
+
+class ApplicationDeleteView(DeleteView):
+    template_name = 'application/deleteapp.html'
+    model = Application
+    success_url = '/'

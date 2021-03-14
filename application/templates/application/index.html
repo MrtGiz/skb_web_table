@@ -25,8 +25,8 @@
               <td>{{ app.phone }}</td>
               <td>{{ app.decision }}</td>
               <td>{{ app.comment }}</td>
-              <td><a href="#">Изменить запись</a></td>
-              <td><a href="#">Удалить запись</a></td>
+              <td><a href="{% url 'app:update' app.pk %}">Изменить запись</a></td>
+              <td><a href="{% url 'app:delete' app.pk %}">Удалить запись</a></td>
             </tr>
           {% endfor %}
         </tbody>

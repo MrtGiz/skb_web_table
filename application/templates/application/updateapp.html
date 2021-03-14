@@ -4,11 +4,11 @@
 {% block content %}
 
 <div class="container-sm">
-  <h2>Создание заявки</h2>
+  <h2>Редактирование заявки</h2>
   <form method="post">
   {% csrf_token %}
   {{ form|crispy }}
-  <input type="submit" value="Создать">
+  <input type="submit" value="Сохранить изменения">
 </form>
 
 </div>
