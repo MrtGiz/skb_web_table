@@ -4,6 +4,7 @@
 {% block content %}
 
 <div class="container-sm">
+
     <table class="table table-hover">
         <thead>
           <tr>
@@ -32,8 +33,22 @@
         </tbody>
     </table>
 
+    <div class="mb-3">
+      <form class="form-inline">
+        {% for field in filter.form %}
+          {{ field.label }}
+          {{ field }}
+        {% endfor %}
+
+        <div class="form-group">
+          <button class="btn btn-primary my-1">Поиск</button>
+        </div>
+      </form>
+    </div>
+
+  <div>
     <form class="form-inline">
-      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Сортировка</label>
+      <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Сортировка:</label>
       <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="orderby">
         <option value="date">дата</option>
         <option value="product">продукт</option>
@@ -41,8 +56,10 @@
         <option value="phone">телефон</option>
       </select>
 
-      <button type="submit" class="btn btn-primary my-1">Принять</button>
+        <button type="submit" class="btn btn-primary my-1">Принять</button>
     </form>
+  </div>
+
 </div>
 
 {% endblock content %}

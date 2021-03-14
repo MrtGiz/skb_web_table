@@ -1,19 +1,27 @@
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
-from django.shortcuts import render
+from django_filters.views import FilterMixin
 
 from .forms import ApplicationForm
 from .models import Application
+from .filters import AppFilter
 
 
-class ApplicationListView(ListView):
+class ApplicationListView(ListView, FilterMixin):
     template_name = 'application/index.html'
     model = Application
+    filterset_class = AppFilter
     context_object_name = 'applications'
 
     def get_queryset(self):
         orderby = self.request.GET.get('orderby', 'date')
         new_queryset = Application.objects.all().order_by(orderby)
         return new_queryset
+
+    def get(self, request, *args, **kwargs):
+        self.filterset = self.get_filterset(self.get_filterset_class())
+        self.object_list = self.filterset.qs
+        context = self.get_context_data(filter=self.filterset, object_list=self.object_list)
+        return self.render_to_response(context)
 
 
 class ApplicationCreateView(CreateView):
