@@ -10,6 +10,11 @@ class ApplicationListView(ListView):
     model = Application
     context_object_name = 'applications'
 
+    def get_queryset(self):
+        orderby = self.request.GET.get('orderby', 'date')
+        new_queryset = Application.objects.all().order_by(orderby)
+        return new_queryset
+
 
 class ApplicationCreateView(CreateView):
     template_name = 'application/createapp.html'
