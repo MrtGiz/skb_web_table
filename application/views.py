@@ -1,10 +1,12 @@
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django_filters.views import FilterMixin
+from django.http import JsonResponse
 
 from .forms import ApplicationForm
 from .models import Application
 from .filters import AppFilter
 from .utils.export import Export
+from .utils import queries
 
 
 class ApplicationListView(ListView, FilterMixin):
@@ -52,3 +54,13 @@ def export_to_csv(request):
 def export_to_xls(request):
     response = Export().export_to_excel()
     return response
+
+
+def count_by_month(request):
+    response = queries.count_by_month()
+    return JsonResponse({'data': response})
+
+
+def last_app_for_client(request):
+    response = queries.last_app_for_client()
+    return JsonResponse({'data': response})
