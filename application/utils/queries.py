@@ -24,7 +24,7 @@ def count_by_month():
 def last_app_for_client():
     with connection.cursor() as cursor:
         cursor.execute(
-            'SELECT id, MAX(date), phone, product, decision '
+            'SELECT id, MAX(date) as date, phone, product, decision '
             'FROM application_application '
             'GROUP BY phone'
         )
@@ -32,10 +32,20 @@ def last_app_for_client():
     return data
 
 
-def new_product():
+def new_product_after_approve():
+    """определить клиентов, по которым были заведены заявки на другой продукт после одобрения."""
     with connection.cursor() as cursor:
         cursor.execute(
-            'SELECT '
+            """
+            WITH apps_approved as (
+                SELECT * 
+                FROM application_application
+                WHERE decision = 'approved'
+                )
+            SELECT * 
+            FROM application_application as app JOIN apps_approved as appr
+            WHERE app.phone = appr.phone AND app.id > appr.id AND app.product != appr.product
+            """
         )
         data = dictfetchall(cursor)
     return data

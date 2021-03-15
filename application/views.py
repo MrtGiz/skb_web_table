@@ -1,6 +1,7 @@
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django_filters.views import FilterMixin
 from django.http import JsonResponse
+from django.shortcuts import render
 
 from .forms import ApplicationForm
 from .models import Application
@@ -58,9 +59,17 @@ def export_to_xls(request):
 
 def count_by_month(request):
     response = queries.count_by_month()
-    return JsonResponse({'data': response})
+    context = {'data': response}
+    return render(request, 'application/count_by_month.html', context)
 
 
 def last_app_for_client(request):
     response = queries.last_app_for_client()
-    return JsonResponse({'data': response})
+    context = {'data': response}
+    return render(request, 'application/last_app_for_client.html', context)
+
+
+def new_product_after_approve(request):
+    response = queries.new_product_after_approve()
+    context = {'data': response}
+    return render(request, 'application/new_product_after_approve.html', context)

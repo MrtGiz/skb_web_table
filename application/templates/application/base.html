@@ -24,6 +24,17 @@
             <a class="nav-link active" href="{% url 'app:create' %}">Создать заявку</a>
             <a class="nav-link active" href="{% url 'app:export_csv' %}">Экспорт в csv</a>
             <a class="nav-link active" href="{% url 'app:export_xls' %}">Экспорт в xls</a>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Запросы к БД
+              </a>
+              <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                <li><a class="dropdown-item" href="{% url 'app:count_by_month' %}">Количество заявок в каждом месяце</a></li>
+                <li><a class="dropdown-item" href="{% url 'app:last_app' %}">Последняя заявка по клиенту</a></li>
+                <li><a class="dropdown-item" href="{% url 'app:new_product' %}">Заявки на другой продукт после одобрения</a></li>
+              </ul>
+            </li>
           </div>
         </div>
       </div>
