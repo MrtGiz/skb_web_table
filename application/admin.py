@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Application
+from .models import Application, AppLogs
 
 
 class ApplicationAdmin(admin.ModelAdmin):
@@ -12,4 +12,12 @@ class ApplicationAdmin(admin.ModelAdmin):
     readonly_fields = ('date', 'version')
 
 
+class AppLogsAdmin(admin.ModelAdmin):
+    list_display = ('app_id', 'date', 'phone', 'product', 'decision')
+
+    fields = ('app_id', 'date', 'product', 'phone', 'decision', 'comment')
+    readonly_fields = ('date', )
+
+
 admin.site.register(Application, ApplicationAdmin)
+admin.site.register(AppLogs, AppLogsAdmin)

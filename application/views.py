@@ -4,7 +4,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 
 from .forms import ApplicationForm
-from .models import Application
+from .models import Application, AppLogs
 from .filters import AppFilter
 from .utils.export import Export
 from .utils import queries
@@ -40,11 +40,39 @@ class ApplicationUpdateView(UpdateView):
     form_class = ApplicationForm
     success_url = '/'
 
+    def form_valid(self, form):
+        """Переопределенный метод для реализации логирования данных при редакитровании"""
+        app = self.get_object()
+
+        log_app = AppLogs(
+            app_id=app.id,
+            product=app.product,
+            phone=app.phone,
+            decision=app.decision,
+            comment=app.comment,
+        )
+        log_app.save()
+        return super().form_valid(form)
+
 
 class ApplicationDeleteView(DeleteView):
     template_name = 'application/deleteapp.html'
     model = Application
     success_url = '/'
+
+    def delete(self, request, *args, **kwargs):
+        """Переопределенный метод для реализации логирования данных при редакитровании"""
+        app = self.get_object()
+
+        log_app = AppLogs(
+            app_id=app.id,
+            product=app.product,
+            phone=app.phone,
+            decision=app.decision,
+            comment=app.comment,
+        )
+        log_app.save()
+        return super().delete(request, *args, **kwargs)
 
 
 def export_to_csv(request):
