@@ -8,8 +8,8 @@ class ApplicationAdmin(admin.ModelAdmin):
     search_fields = ('date', 'phone')
     ordering = ('date', 'phone')
 
-    fields = ('date', 'product', 'phone', 'decision', 'comment')
-    readonly_fields = ('date', )
+    fields = ('date', 'product', 'phone', 'decision', 'comment', 'version')
+    readonly_fields = ('date', 'version')
 
 
 admin.site.register(Application, ApplicationAdmin)

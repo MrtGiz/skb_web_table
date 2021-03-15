@@ -1,5 +1,6 @@
 from django.db import models
 from django.core import validators
+from concurrency.fields import IntegerVersionField
 
 
 class Application(models.Model):
@@ -29,6 +30,7 @@ class Application(models.Model):
     )
     decision = models.CharField('Решение', choices=Decision.choices, max_length=20, blank=True, null=True)
     comment = models.TextField('Комментарий к решению', blank=True, null=True)
+    version = IntegerVersionField()     # реализация конкурентности
 
     class Meta:
         verbose_name = 'Заявка'

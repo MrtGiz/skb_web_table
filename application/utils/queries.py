@@ -11,6 +11,7 @@ def dictfetchall(cursor):
 
 
 def count_by_month():
+    """определяет количество заявок в каждом месяце"""
     with connection.cursor() as cursor:
         cursor.execute(
             'SELECT COUNT(id) as Count, strftime("%m", date) as Month '
@@ -22,6 +23,7 @@ def count_by_month():
 
 
 def last_app_for_client():
+    """определяет последнюю заявку по клиенту"""
     with connection.cursor() as cursor:
         cursor.execute(
             'SELECT id, MAX(date) as date, phone, product, decision '
@@ -33,7 +35,7 @@ def last_app_for_client():
 
 
 def new_product_after_approve():
-    """определить клиентов, по которым были заведены заявки на другой продукт после одобрения."""
+    """определяет клиентов, по которым были заведены заявки на другой продукт после одобрения"""
     with connection.cursor() as cursor:
         cursor.execute(
             """
